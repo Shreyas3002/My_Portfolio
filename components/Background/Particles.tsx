@@ -1,36 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import {
+  Particles,
+  ParticlesProvider,
+  useParticlesProvider,
+} from "@tsparticles/react";
 
-export default function ParticleBackground() {
-  const [init, setInit] = useState(false);
+function ParticleCanvas() {
+  const { loaded } = useParticlesProvider();
 
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
-
-  if (!init) return null;
+  if (!loaded) return null;
 
   return (
     <Particles
       id="particles"
       className="absolute inset-0"
       options={{
-        fullScreen: false,
-
+        fullScreen: {
+          enable: false,
+        },
         background: {
           color: {
             value: "transparent",
           },
         },
-
         fpsLimit: 60,
+        detectRetina: true,
 
         particles: {
           number: {
@@ -39,6 +35,18 @@ export default function ParticleBackground() {
 
           color: {
             value: "#67e8f9",
+          },
+
+          links: {
+            enable: true,
+            color: "#22d3ee",
+            distance: 150,
+            opacity: 0.12,
+          },
+
+          move: {
+            enable: true,
+            speed: 0.4,
           },
 
           opacity: {
@@ -50,18 +58,6 @@ export default function ParticleBackground() {
               min: 1,
               max: 3,
             },
-          },
-
-          move: {
-            enable: true,
-            speed: 0.4,
-          },
-
-          links: {
-            enable: true,
-            distance: 150,
-            color: "#22d3ee",
-            opacity: 0.12,
           },
         },
 
@@ -79,9 +75,19 @@ export default function ParticleBackground() {
             },
           },
         },
-
-        detectRetina: true,
       }}
     />
+  );
+}
+
+export default function ParticleBackground() {
+  return (
+    <ParticlesProvider
+      init={async (engine) => {
+        await loadSlim(engine);
+      }}
+    >
+      <ParticleCanvas />
+    </ParticlesProvider>
   );
 }

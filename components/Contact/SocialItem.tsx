@@ -8,6 +8,8 @@ interface SocialItemProps {
   title: string;
   value: string;
   href?: string;
+  target?: React.HTMLAttributeAnchorTarget;
+  rel?: string;
 }
 
 export default function SocialItem({
@@ -15,14 +17,13 @@ export default function SocialItem({
   title,
   value,
   href,
+  target,
+  rel,
 }: SocialItemProps) {
   const content = (
     <div className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_30px_rgba(34,211,238,0.08)]">
-
       {/* Left */}
-
       <div className="flex items-center gap-4">
-
         <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-cyan-500/10 text-cyan-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-cyan-500/20">
           {icon}
         </div>
@@ -36,7 +37,6 @@ export default function SocialItem({
             {value}
           </p>
         </div>
-
       </div>
 
       {href && (
@@ -45,7 +45,6 @@ export default function SocialItem({
           className="text-zinc-500 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-cyan-400"
         />
       )}
-
     </div>
   );
 
@@ -53,11 +52,15 @@ export default function SocialItem({
     return content;
   }
 
+  const isExternal =
+    href.startsWith("http://") || href.startsWith("https://");
+
   return (
     <a
       href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      target={target ?? (isExternal ? "_blank" : undefined)}
+      rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+      className="block"
     >
       {content}
     </a>

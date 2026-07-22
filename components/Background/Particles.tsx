@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Particles from "@tsparticles/react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
 export default function ParticleBackground() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      await loadSlim(window);
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
       setInit(true);
-    })();
+    });
   }, []);
 
   if (!init) return null;
@@ -19,6 +20,7 @@ export default function ParticleBackground() {
   return (
     <Particles
       id="particles"
+      className="absolute inset-0"
       options={{
         fullScreen: false,
 
@@ -80,7 +82,6 @@ export default function ParticleBackground() {
 
         detectRetina: true,
       }}
-      className="absolute inset-0"
     />
   );
 }

@@ -20,6 +20,9 @@ const fadeUp = {
 };
 
 export default function Footer() {
+  const gmailComposeUrl =
+    "https://mail.google.com/mail/?view=cm&fs=1&to=shreyasrkumar30@gmail.com&su=Lets%20Work%20Together&body=Hi%20Shreyas,%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect.";
+
   return (
     <footer className="relative overflow-hidden border-t border-white/10 py-20">
       {/* Glow */}
@@ -44,8 +47,8 @@ export default function Footer() {
         </p>
 
         <p className="mt-2 max-w-xl text-zinc-500">
-          Building intelligent software experiences with Artificial Intelligence,
-          modern web technologies, and thoughtful design.
+          Building intelligent software experiences with Artificial
+          Intelligence, modern web technologies, and thoughtful design.
         </p>
 
         {/* Divider */}
@@ -75,9 +78,11 @@ export default function Footer() {
             <FaLinkedin size={22} />
           </a>
 
-          {/* Email */}
+          {/* Gmail */}
           <a
-            href="mailto:shreyasrkumar30@gmail.com?subject=Let's%20Work%20Together&body=Hi%20Shreyas,%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Email"
             className="cursor-hover rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:text-cyan-400"
           >

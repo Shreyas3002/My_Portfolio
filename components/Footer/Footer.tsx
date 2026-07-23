@@ -91,7 +91,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com&su=Let's%20Work%20Together&body=Hi%20Shreyas,%0A%0AI%20visited%20your%20portfolio..."
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=shreyasrkumar30@gmail.com.com&su=Let's%20Work%20Together&body=Hi%20Shreyas,%0A%0AI%20visited%20your%20portfolio..."
   target="_blank"
   rel="noopener noreferrer"
             className="cursor-hover rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:text-cyan-400"
